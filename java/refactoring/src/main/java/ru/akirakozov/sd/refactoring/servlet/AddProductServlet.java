@@ -20,19 +20,18 @@ public class AddProductServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String name = request.getParameter("name");
         long price = Long.parseLong(request.getParameter("price"));
-
         Request r = new AddRequest(response.getWriter(), name, price);
         try {
-            try (Connection c = DriverManager.getConnection("jdbc:sqlite:test.db")) {
-                Statement stmt = c.createStatement();
+            try (
+                    Connection c = DriverManager.getConnection("jdbc:sqlite:test.db");
+                    Statement stmt = c.createStatement()
+            ) {
                 stmt.executeUpdate(r.sqlQuery);
                 r.printResponse(null);
-                stmt.close();
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
         response.setContentType("text/html");
         response.setStatus(HttpServletResponse.SC_OK);
     }
