@@ -10,11 +10,13 @@ public abstract class Request {
     public String sqlQuery;
     protected HtmlWriter writer;
     protected boolean isGoodHtml;
+    public boolean isNotQuery;
 
     Request(PrintWriter printWriter) {
         sqlQuery = "";
         writer = new HtmlWriter(printWriter);
         isGoodHtml = true;
+        isNotQuery = false;
     }
 
     public abstract void printResponse(ResultSet rs) throws SQLException;

@@ -9,6 +9,7 @@ public class AddRequest extends Request {
         sqlQuery = "INSERT INTO PRODUCT " +
                 "(NAME, PRICE) VALUES (\"" + name + "\"," + price + ")";
         isGoodHtml = false;
+        isNotQuery = true;
     }
 
     @Override
