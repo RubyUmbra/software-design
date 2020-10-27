@@ -1,4 +1,4 @@
 package ru.akirakozov.sd.refactoring.request;
 
-interface Request {
+public interface Request {
 }
