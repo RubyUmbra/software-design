@@ -12,13 +12,6 @@ public class MaxRequest extends QueryRequest {
 
     @Override
     public void printResponse(ResultSet rs) throws SQLException {
-        writer.startBody();
-        writer.printlnHeader("Product with max price: ");
-        while (rs.next()) {
-            String name = rs.getString("name");
-            int price = rs.getInt("price");
-            writer.printlnProduct(name, price);
-        }
-        writer.finishBody();
+        printResponseWithProducts(rs, "Product with max price: ");
     }
 }

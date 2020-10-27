@@ -12,12 +12,6 @@ public class CountRequest extends QueryRequest {
 
     @Override
     public void printResponse(ResultSet rs) throws SQLException {
-        writer.startBody();
-        writer.println("Number of products: ");
-
-        if (rs.next()) {
-            writer.println(rs.getInt(1));
-        }
-        writer.finishBody();
+        printResponseWithNumber(rs, "Number of products: ");
     }
 }
