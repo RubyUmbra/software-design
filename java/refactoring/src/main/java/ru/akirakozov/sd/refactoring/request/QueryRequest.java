@@ -1,4 +1,9 @@
 package ru.akirakozov.sd.refactoring.request;
 
-public abstract class QueryRequest implements Request {
+import java.io.PrintWriter;
+
+public abstract class QueryRequest extends Request {
+    QueryRequest(PrintWriter w) {
+        super(w);
+    }
 }

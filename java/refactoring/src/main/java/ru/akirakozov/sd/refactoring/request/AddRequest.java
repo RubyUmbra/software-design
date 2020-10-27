@@ -1,17 +1,18 @@
 package ru.akirakozov.sd.refactoring.request;
 
-public class AddRequest implements Request {
-    private final String name;
-    private final long price;
+import java.io.PrintWriter;
+import java.sql.ResultSet;
 
-    public AddRequest(String name, long price) {
-        this.name = name;
-        this.price = price;
+public class AddRequest extends Request {
+    public AddRequest(PrintWriter w, String name, long price) {
+        super(w);
+        sqlQuery = "INSERT INTO PRODUCT " +
+                "(NAME, PRICE) VALUES (\"" + name + "\"," + price + ")";
+        isGoodHtml = false;
     }
 
     @Override
-    public String getSqlQuery() {
-        return "INSERT INTO PRODUCT " +
-                "(NAME, PRICE) VALUES (\"" + name + "\"," + price + ")";
+    public void printResponse(ResultSet rs) {
+        writer.println("OK");
     }
 }

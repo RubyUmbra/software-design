@@ -19,19 +19,13 @@ public class GetProductsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Request r = new GetRequest();
+        Request r = new GetRequest(response.getWriter());
         try {
             try (Connection c = DriverManager.getConnection("jdbc:sqlite:test.db")) {
                 Statement stmt = c.createStatement();
-                ResultSet rs = stmt.executeQuery(r.getSqlQuery());
-                response.getWriter().println("<html><body>");
+                ResultSet rs = stmt.executeQuery(r.sqlQuery);
 
-                while (rs.next()) {
-                    String name = rs.getString("name");
-                    int price = rs.getInt("price");
-                    response.getWriter().println(name + "\t" + price + "</br>");
-                }
-                response.getWriter().println("</body></html>");
+                r.printResponse(rs);
 
                 rs.close();
                 stmt.close();
